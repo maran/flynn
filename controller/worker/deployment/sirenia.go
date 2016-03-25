@@ -100,7 +100,7 @@ func (d *DeployJob) deploySirenia() (err error) {
 					}
 					return nil
 				}
-			case <-time.After(60 * time.Second):
+			case <-time.After(time.Duration(d.DeployTimeout) * time.Second):
 				return loggedErr("timed out waiting for peer to stop")
 			}
 		}
@@ -145,7 +145,7 @@ func (d *DeployJob) deploySirenia() (err error) {
 					inst = event.Instance
 					break loop
 				}
-			case <-time.After(60 * time.Second):
+			case <-time.After(time.Duration(d.DeployTimeout) * time.Second):
 				return nil, loggedErr("timed out waiting for new instance to come up")
 			}
 		}
@@ -265,7 +265,7 @@ loop:
 					break loop
 				}
 			}
-		case <-time.After(60 * time.Second):
+		case <-time.After(time.Duration(d.DeployTimeout) * time.Second):
 			return loggedErr("timed out waiting for job events")
 		}
 	}
