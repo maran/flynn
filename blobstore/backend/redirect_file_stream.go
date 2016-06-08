@@ -1,4 +1,4 @@
-package main
+package backend
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"net/url"
 )
 
-func NewRedirectFileStream(url string) FileStream {
+func newRedirectFileStream(url string) FileStream {
 	return &redirectFileStream{url: url}
 }
 
